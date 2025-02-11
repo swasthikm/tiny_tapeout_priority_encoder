@@ -33,7 +33,7 @@ module tt_um_priority_encoder (
               8'b01??????:a  = 3'b110;
               8'b1???????:a = 3'b111;
  
-          default:uo_out[2:0]  = 3'bzzz;
+          default:a = 3'bzzz;
           endcase
      end
     assign uo_out[2:0] = a;
