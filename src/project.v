@@ -15,7 +15,7 @@ module tt_um_priority_encoder (
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
 );
-
+    reg [2:0] a;
   // All output pins must be assigned. If not used, assign to 0
   assign uio_out = 0;
   assign uio_oe  = 0; 
@@ -24,19 +24,19 @@ module tt_um_priority_encoder (
       begin
           casez(ui_in)
  
-              8'b00000001:uo_out[2:0] = 3'b000;
-              8'b0000001?:uo_out[2:0]  = 3'b001;
-              8'b000001??:uo_out[2:0]  = 3'b010;
-              8'b00001???:uo_out[2:0]  = 3'b011;
-              8'b0001????:uo_out[2:0]  = 3'b100;
-              8'b001?????:uo_out[2:0]  = 3'b101;
-              8'b01??????:uo_out[2:0]  = 3'b110;
-              8'b1???????:uo_out[2:0]  = 3'b111;
+              8'b00000001:a = 3'b000;
+              8'b0000001?:a  = 3'b001;
+              8'b000001??:a  = 3'b010;
+              8'b00001???:a = 3'b011;
+              8'b0001????:a  = 3'b100;
+              8'b001?????:a  = 3'b101;
+              8'b01??????:a  = 3'b110;
+              8'b1???????:a = 3'b111;
  
           default:uo_out[2:0]  = 3'bzzz;
           endcase
      end
-  
+    assign uo_out[2:0] = a;
   // List all unused inputs to prevent warnings
   wire _unused = &{ena, clk, rst_n, 1'b0};
 
